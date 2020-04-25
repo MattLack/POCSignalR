@@ -9,7 +9,7 @@ Base Documentation:
 
 To run Front End page (angular):
 
-- in cmd line, (C:\Users\ams\Desktop\Teste\RealTImeCharts-Client) execute first the command [npm install];
+- in cmd line, (for directory \RealTImeCharts-Client) execute first the command [npm install];
 
 - after the npm install conclusion, run [ng serve] ;
 
