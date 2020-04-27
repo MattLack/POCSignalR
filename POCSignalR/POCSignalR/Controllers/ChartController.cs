@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using POCSignalR.DataStorage;
@@ -13,7 +11,7 @@ namespace POCSignalR.Controllers
     [ApiController]
     public class ChartController : ControllerBase
     {
-        private IHubContext<ChartHub> _hub;
+        private readonly IHubContext<ChartHub> _hub;
 
         public ChartController(IHubContext<ChartHub> hub)
         {
@@ -24,10 +22,9 @@ namespace POCSignalR.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var timermanager = new TimerManager(() => _hub.Clients.All.SendAsync("transferchartdata", DataManager.GetData()));
-            return Ok(new { Message = "Request completed" });
+            var timermanager =
+                new TimerManager(() => _hub.Clients.All.SendAsync("transferchartdata", DataManager.GetData()));
+            return Ok(new {Message = "Request completed"});
         }
-
     }
-
 }

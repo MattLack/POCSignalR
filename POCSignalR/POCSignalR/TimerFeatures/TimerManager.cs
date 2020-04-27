@@ -5,11 +5,9 @@ namespace POCSignalR.TimerFeatures
 {
     public class TimerManager
     {
-        private Timer _timer;
-        private AutoResetEvent _autoResetEvent;
-        private Action _action;
-
-        public DateTime TimerStarted { get; }
+        private readonly Action _action;
+        private readonly AutoResetEvent _autoResetEvent;
+        private readonly Timer _timer;
 
         public TimerManager(Action action)
         {
@@ -19,17 +17,15 @@ namespace POCSignalR.TimerFeatures
             TimerStarted = DateTime.Now;
         }
 
+        public DateTime TimerStarted { get; }
+
 
         public void Execute(object stateInfo)
         {
             _action();
 
             //dispose timer after 60 seconds
-            if((DateTime.Now - TimerStarted).Seconds > 60)
-            {
-                _timer.Dispose();
-            }
+            if ((DateTime.Now - TimerStarted).Seconds > 60) _timer.Dispose();
         }
-
     }
 }
